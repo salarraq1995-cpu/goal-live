@@ -49,3 +49,38 @@ async function loadMatches() {
 loadMatches();
 
 loadMatches();
+async function loadNews(){
+
+    const newsDiv = document.getElementById("news");
+
+    const response = await fetch(
+        "https://goaal-live-api.joud07511.workers.dev"
+    );
+
+    const data = await response.json();
+
+    newsDiv.innerHTML = "";
+
+    data.articles.slice(0,10).forEach(article => {
+
+        newsDiv.innerHTML += `
+
+        <div class="card">
+
+            <h3>${article.title}</h3>
+
+            <p>${article.description || ""}</p>
+
+            <small>
+            📰 ${article.source.name}
+            </small>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+loadNews();
