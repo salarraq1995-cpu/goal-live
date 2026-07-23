@@ -47,8 +47,6 @@ async function loadMatches() {
 }
 
 loadMatches();
-
-loadMatches();
 async function loadNews(){
 
     const newsDiv = document.getElementById("news");
