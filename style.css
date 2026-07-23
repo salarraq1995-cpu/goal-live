@@ -1,1 +1,106 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Cairo,sans-serif;
+}
 
+body{
+    background:#0d1117;
+    color:white;
+}
+
+header{
+    background:#161b22;
+    padding:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+}
+
+.logo{
+    color:#00ff88;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.search{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    margin:15px 0;
+    background:#1f2937;
+    color:white;
+}
+
+.tabs{
+    display:flex;
+    overflow:auto;
+    gap:10px;
+    padding:10px;
+}
+
+.tab{
+    background:#1f2937;
+    padding:10px 18px;
+    border-radius:25px;
+    white-space:nowrap;
+    cursor:pointer;
+}
+
+.tab.active{
+    background:#00ff88;
+    color:black;
+    font-weight:bold;
+}
+
+.container{
+    padding:15px;
+}
+
+.card{
+    background:#1f2937;
+    border-radius:18px;
+    padding:15px;
+    margin-bottom:15px;
+}
+
+.league{
+    color:#00ff88;
+    margin-bottom:12px;
+    font-size:14px;
+}
+
+.match{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.team{
+    width:35%;
+    text-align:center;
+}
+
+.score{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.time{
+    margin-top:10px;
+    text-align:center;
+    color:#9ca3af;
+}
+
+.live{
+    margin-top:12px;
+    text-align:center;
+    background:red;
+    display:inline-block;
+    padding:5px 12px;
+    border-radius:20px;
+  }
