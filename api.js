@@ -2,78 +2,126 @@ const matchesDiv = document.getElementById("matches");
 
 async function loadMatches() {
 
-    const response = await fetch(
-        "https://goaal-live-api.joud07511.workers.dev"
-    );
+    try {
 
-    const data = await response.json();
+        const response = await fetch(
+            "https://goaal-live-api.joud07511.workers.dev"
+        );
 
-    matchesDiv.innerHTML = "";
+        const data = await response.json();
 
-    data.forEach(match => {
+        matchesDiv.innerHTML = "";
 
-        matchesDiv.innerHTML += `
+        data.forEach(match => {
 
-        <div class="card">
+            const score = match.MatchResults?.[0]
+                ? `${match.MatchResults[0].PointsTeam1} - ${match.MatchResults[0].PointsTeam2}`
+                : "-";
 
-            <div class="league">
-            ⚽ الدوري الألماني
+            matchesDiv.innerHTML += `
+
+            <div class="card">
+
+                <div class="league">
+                    🏆 كرة القدم
+                </div>
+
+                <div class="match">
+
+                    <div class="team">
+                        ${match.Team1.TeamName}
+                    </div>
+
+                    <div class="score">
+                        ${score}
+                    </div>
+
+                    <div class="team">
+                        ${match.Team2.TeamName}
+                    </div>
+
+                </div>
+
+                <div class="time">
+                    ${match.MatchDateTime 
+                    ? new Date(match.MatchDateTime).toLocaleDateString("ar-IQ")
+                    : ""}
+                </div>
+
             </div>
 
-            <div class="match">
+            `;
 
-                <div class="team">
-                ${match.Team1.TeamName}
-                </div>
+        });
 
-                <div class="score">
-                ${match.MatchResults?.[0]
-                ? match.MatchResults[0].PointsTeam1 + " - " + match.MatchResults[0].PointsTeam2
-                : "vs"}
-                </div>
+    } catch(error){
 
-                <div class="team">
-                ${match.Team2.TeamName}
-                </div>
-
-            </div>
-
-        </div>
-
+        matchesDiv.innerHTML = `
+        <p>❌ تعذر تحميل النتائج</p>
         `;
 
-    });
+    }
 
 }
 
+
 loadMatches();
+
+
+// الأخبار الرياضية
+
 async function loadNews(){
 
     const newsDiv = document.getElementById("news");
 
-    const response = await fetch(
-        "https://goaal-live-api.joud07511.workers.dev"
-    );
+    try {
 
-    const data = await response.json();
+        const response = await fetch(
+            "https://goaal-live-api.joud07511.workers.dev"
+        );
 
-    newsDiv.innerHTML = "";
+        const data = await response.json();
 
-    data.articles.slice(0,10).forEach(article => {
+        newsDiv.innerHTML = "";
 
-        newsDiv.innerHTML += `
+        if(data.articles){
 
-        <div class="card">
+            data.articles.slice(0,10).forEach(article => {
 
-            <h3>${article.title}</h3>
+                newsDiv.innerHTML += `
 
-            <p>${article.description || ""}</p>
+                <div class="card">
 
-            <small>
-            📰 ${article.source.name}
-            </small>
+                    <h3>${article.title}</h3>
 
-        </div>
+                    <p>
+                    ${article.description || ""}
+                    </p>
+
+                    <small>
+                    📰 ${article.source.name}
+                    </small>
+
+                </div>
+
+                `;
+
+            });
+
+        }
+
+    } catch(error){
+
+        newsDiv.innerHTML = `
+        <p>❌ تعذر تحميل الأخبار</p>
+        `;
+
+    }
+
+}
+
+
+loadNews();
 
         `;
 
